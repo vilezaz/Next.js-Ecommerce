@@ -35,7 +35,7 @@ const Footer = () => {
       <div className="flex items-center space-x-1.5">
         <span>Created by</span>
         <a
-          className="text-blue-500 hover:underline"
+          className="text-blue-500 hover:underline font-bold"
           href="github.com/aitezazdev"
           target="_blank">
           Aitezaz.
