@@ -16,7 +16,7 @@ const Navbar = () => {
         <span className='relative right-7'><IoSearch /></span>
       </div>
       <div className='text-xl cursor-pointer'>
-        <IoCartOutline />
+        <Link href={"/cart"}><IoCartOutline /></Link>
       </div>
     </nav>
   )
