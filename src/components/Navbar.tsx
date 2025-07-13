@@ -5,9 +5,9 @@ import { IoCartOutline, IoSearch } from "react-icons/io5";
 const Navbar = () => {
   return (
     <nav className='flex items-center justify-between bg-[#171717] text-white py-5 px-10'>
-      <h1>ZAZ STORE.</h1>
+      <h1><Link href={"/"}>ZAZ STORE.</Link></h1>
       <div className='felx space-x-5 text-gray-400'>
-        <Link href={"all"}>All</Link>
+        <Link href={"/search"}>All</Link>
         <Link href={"/shirts"}>Shirts</Link>
         <Link href={"/shoes"}>Shoes</Link>
       </div>
