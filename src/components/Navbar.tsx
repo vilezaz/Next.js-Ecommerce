@@ -12,7 +12,7 @@ const Navbar = () => {
         <Link href={"/shoes"}>Shoes</Link>
       </div>
       <div className='flex items-center'>
-        <input className='min-w-80 border border-gray-600 outline-none rounded-md py-1.5 px-3   placeholder:text-sm placeholder:text-gray-400' type="text" placeholder='Search for Products' />
+        <input className='min-w-80 border border-gray-600 outline-none rounded-md py-1.5 px-3 placeholder:text-sm placeholder:text-gray-400' type="text" placeholder='Search for Products ...' />
         <span className='relative right-7'><IoSearch /></span>
       </div>
       <div className='text-xl cursor-pointer'>
