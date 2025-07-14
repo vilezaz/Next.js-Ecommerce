@@ -1,5 +1,4 @@
 import RandomProducts from "@/components/RandomProducts";
-import { title } from "process";
 
 export const metadata = {
   title: "Zaz Store"

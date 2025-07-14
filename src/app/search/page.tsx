@@ -4,6 +4,10 @@ import SortingOrder from "@/components/SortingOrder";
 import { getProductsByCategory } from "@/lib/data/products";
 import React from "react";
 
+export const metadata = {
+  title: "Zaz Store - Search",
+}
+
 const AllProductsPage = () => {
   const products = getProductsByCategory("all");
 
