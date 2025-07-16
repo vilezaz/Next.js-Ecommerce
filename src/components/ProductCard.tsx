@@ -1,4 +1,5 @@
-import { Product } from "@/lib/data/products";
+import { Product } from "@/types/product";
+import Image from "next/image";
 import React from "react";
 
 type Props = {
@@ -8,7 +9,7 @@ type Props = {
 const ProductCard = ({ product }: Props) => {
   return (
     <div className="bg-[#000000] h-[50vh] text-white p-4 rounded-md">
-      <img
+      <Image width={300} height={300}
         src={product.image}
         alt={product.title}
         className="w-full h-40 object-cover mb-4"

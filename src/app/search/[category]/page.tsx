@@ -1,7 +1,7 @@
 import CollectionSidebar from "@/components/CollectionSidebar";
 import ProductCard from "@/components/ProductCard";
 import SortingOrder from "@/components/SortingOrder";
-import { getProductsByCategory } from "@/lib/data/products";
+import { getProductByCategory } from "@/lib/api/products";
 import React from "react";
 
 type Props = {
@@ -10,9 +10,9 @@ type Props = {
   };
 };
 
-const CategoryPage = ({ params }: Props) => {
+const CategoryPage = async ({ params }: Props) => {
   const category = params.category.toLowerCase();
-  const products = getProductsByCategory(category);
+  const products = await getProductByCategory(category);
 
   return (
     <div className="flex bg-[#171717] min-h-[80vh] text-white py-5">
@@ -20,7 +20,7 @@ const CategoryPage = ({ params }: Props) => {
 
       <div className="grid grid-cols-3 gap-5 grow">
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product._id} product={product} />
         ))}
       </div>
 
