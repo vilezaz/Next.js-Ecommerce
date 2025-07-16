@@ -17,9 +17,9 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
     const { id } = params;
     const body = await req.json();
 
-    const { title, description, category, price, image, stars } = body;
+    const { title, description, category, price, image, size } = body;
 
-    if (!title || !description || !category || !price) {
+    if (!title || !description || !category || !price || !size) {
       return NextResponse.json(
         { message: "All fields are required" },
         { status: 400 }
@@ -31,7 +31,7 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
       description,
       category,
       price,
-      stars,
+      size,
       image,
     });
     if (!updateProduct) {

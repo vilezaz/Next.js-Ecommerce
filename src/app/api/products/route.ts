@@ -1,6 +1,8 @@
 import { connectDB } from "@/lib/db";
 import { handleApiError } from "@/lib/middlewares/error";
 import { Product } from "@/lib/models/Product";
+import { productSchema } from "@/lib/validations/product";
+import { validateRequest } from "@/lib/validations/validateSchema";
 import { NextRequest, NextResponse } from "next/server";
 
 // get all products
@@ -18,10 +20,14 @@ export const GET = async () => {
 export const POST = async (req: NextRequest) => {
   try {
     await connectDB();
-    const body = await req.json();
-    const { title, price, category, description, image, stars } = body;
 
-    if (!title || !description || !category || !price || !stars) {
+    const validatedData = await validateRequest(productSchema, req);
+    if (validatedData instanceof NextResponse) return validatedData;
+
+    const { title, price, category, description, image, size } = validatedData;
+    
+
+    if (!title || !description || !category || !price || !size) {
       return NextResponse.json(
         { message: "All fields are required" },
         { status: 400 }
@@ -41,8 +47,8 @@ export const POST = async (req: NextRequest) => {
       price,
       category,
       description,
+      size,
       image: image ?? "",
-      stars: stars ?? 0,
     });
 
     return NextResponse.json(
