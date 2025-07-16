@@ -1,6 +1,8 @@
 import { connectDB } from "@/lib/db";
 import { handleApiError } from "@/lib/middlewares/error";
 import { Product } from "@/lib/models/Product";
+import { productSchema } from "@/lib/validations/product";
+import { validateRequest } from "@/lib/validations/validateSchema";
 import { NextRequest, NextResponse } from "next/server";
 
 type Params = {
@@ -15,11 +17,13 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
     await connectDB();
 
     const { id } = params;
-    const body = await req.json();
 
-    const { title, description, category, price, image, size } = body;
+    const validatedData = await validateRequest(productSchema, req);
+    if (validatedData instanceof NextResponse) return validatedData;
 
-    if (!title || !description || !category || !price || !size) {
+    const { title, description, category, price, image, size } = validatedData;
+
+    if (!title || !description || !category || !price || !size || !image) {
       return NextResponse.json(
         { message: "All fields are required" },
         { status: 400 }

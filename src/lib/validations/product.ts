@@ -6,7 +6,7 @@ export const productSchema = z.object({
   category: z.enum(["shoes", "shirts", "caps", "pants", "others"]),
   price: z.number().min(0.01, "Price must be positive"),
   size: z.string().min(1, "Size is required"),
-  image: z.string().url().optional(),
+  image: z.string(),
 });
 
 export const partialProductSchema = productSchema.partial();

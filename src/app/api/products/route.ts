@@ -25,9 +25,8 @@ export const POST = async (req: NextRequest) => {
     if (validatedData instanceof NextResponse) return validatedData;
 
     const { title, price, category, description, image, size } = validatedData;
-    
 
-    if (!title || !description || !category || !price || !size) {
+    if (!title || !description || !category || !price || !size || !image) {
       return NextResponse.json(
         { message: "All fields are required" },
         { status: 400 }
