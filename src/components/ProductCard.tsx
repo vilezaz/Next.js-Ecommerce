@@ -8,15 +8,29 @@ type Props = {
 
 const ProductCard = ({ product }: Props) => {
   return (
-    <div className="bg-[#000000] h-[50vh] text-white p-4 rounded-md">
-      <Image width={300} height={300}
-        src={product.image}
-        alt={product.title}
-        className="w-full h-40 object-cover mb-4"
-      />
-      <h3 className="text-lg font-semibold">{product.title}</h3>
-      <p className="text-sm text-gray-300">{product.category}</p>
-      <p className="text-xl mt-2">${product.price.toFixed(2)}</p>
+    <div className="relative bg-[#000000] text-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+      <div className="relative w-full h-52 sm:h-64 md:h-72">
+        <Image
+          src={product.image}
+          alt={product.title}
+          layout="fill"
+          objectFit="cover"
+          className="p-10"
+        />
+      </div>
+
+      <div className="my-2 border border-gray-700 flex items-center justify-between w-fit mx-auto rounded-full">
+        <h3 className="text-lg text-gray-300 px-2 font-semibold truncate">
+          {product.title}
+        </h3>
+        <strong className="block bg-green-900 text-white px-3 m-1 py-1.5 rounded-3xl">
+          ${product.price.toFixed(2)}
+        </strong>
+      </div>
+
+      <button className="absolute right-3 top-3 px-3 py-1.5 border-2 border-blue-500 rounded-3xl text-white bg-blue-500 font-semibold hover:cursor-pointer hover:bg-blue-600 transition-colors duration-200">
+        Add To Cart
+      </button>
     </div>
   );
 };
