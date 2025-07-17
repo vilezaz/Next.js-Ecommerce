@@ -9,6 +9,7 @@ const CollectionSidebar = () => {
         <Link className="hover:underline" href={"/search"}>All</Link>
         <Link className="hover:underline" href={"/search/shirts"}>Shirts</Link>
         <Link className="hover:underline" href={"/search/shoes"}>Shoes</Link>
+        <Link className="hover:underline" href={"/search/pants"}>Pants</Link>
         <Link className="hover:underline" href={"/search/caps"}>Caps</Link>
       </div>
     </aside>

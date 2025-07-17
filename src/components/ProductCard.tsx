@@ -8,14 +8,13 @@ type Props = {
 
 const ProductCard = ({ product }: Props) => {
   return (
-    <div className="relative bg-[#000000] text-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+    <div className="relative bg-[#000000] text-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 h-[360px]">
       <div className="relative w-full h-52 sm:h-64 md:h-72">
         <Image
           src={product.image}
-          alt={product.title}
-          layout="fill"
-          objectFit="cover"
-          className="p-10"
+          alt={product.title} priority
+          fill   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="p-10 object-cover"
         />
       </div>
 
