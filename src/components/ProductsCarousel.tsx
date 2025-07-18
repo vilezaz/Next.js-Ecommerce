@@ -1,6 +1,7 @@
 import { getAllProducts } from "@/lib/api/products";
 import Image from "next/image";
 import React from "react";
+import ProductTitlePriceCard from "./ProductTitlePriceCard";
 
 const ProductsCarousel = async () => {
   const products = await getAllProducts();
@@ -11,9 +12,15 @@ const ProductsCarousel = async () => {
           <div
             key={product._id}
             className="bg-[#000000] min-w-[450px] mb-5 h-[30vh] rounded-md relative border hover:cursor-pointer border-transparent hover:border-blue-500 group">
+            <Image
+              src={product.image}
+              alt={product.title}
+              fill
+              className="object-contain p-2 group-hover:scale-105 transition-all duration-400"
+            />
 
-              <Image src={product.image} alt={product.title} fill className="object-contain p-2 group-hover:scale-105 transition-all duration-400" />
-            </div>
+            <ProductTitlePriceCard product={product} />
+          </div>
         ))}
       </div>
     </div>
