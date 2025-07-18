@@ -1,0 +1,23 @@
+import { getAllProducts } from "@/lib/api/products";
+import Image from "next/image";
+import React from "react";
+
+const ProductsCarousel = async () => {
+  const products = await getAllProducts();
+  return (
+    <div className="w-full overflow-x-auto">
+      <div className="bg-[#171717] flex space-x-5 flex-nowrap scroll-animate">
+        {products.map((product, _index) => (
+          <div
+            key={product._id}
+            className="bg-[#000000] min-w-[450px] mb-5 h-[30vh] rounded-md relative border hover:cursor-pointer border-transparent hover:border-blue-500 group">
+
+              <Image src={product.image} alt={product.title} fill className="object-contain p-2 group-hover:scale-105 transition-all duration-400" />
+            </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default ProductsCarousel;

@@ -9,13 +9,26 @@ export const getAllProducts = async (): Promise<Product[]> => {
   return res.json();
 };
 
+export const getProductByCategory = async (
+  category: string
+): Promise<Product[]> => {
+  const res = await fetch(
+    `${process.env.NEXTAUTH_URL}/api/products/category/${category}`,
+    {
+      cache: "no-cache",
+    }
+  );
 
-export const getProductByCategory = async (category: string): Promise<Product[]> => {
-  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/products/category/${category}`, {
+  if (!res.ok) throw new Error("Failed to fetch products");
+  const data = await res.json();
+  return data.products;
+};
+
+export const getRandomProducts = async (): Promise<Product[]> => {
+  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/products/random`, {
     cache: "no-cache",
   });
 
-  if (!res.ok) throw new Error("Failed to fetch products");
   const data = await res.json();
   return data.products;
 };
