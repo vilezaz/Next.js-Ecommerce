@@ -9,7 +9,7 @@ type Params = {
   };
 };
 
-export const GET = async (req: NextRequest, { params }: Params) => {
+export const GET = async (_req: NextRequest, { params }: Params) => {
   try {
     await connectDB();
 
