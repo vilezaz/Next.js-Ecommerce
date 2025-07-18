@@ -4,6 +4,7 @@ import { Product } from "@/lib/models/Product";
 import { productSchema } from "@/lib/validations/product";
 import { validateRequest } from "@/lib/validations/validateSchema";
 import { NextRequest, NextResponse } from "next/server";
+import slugify from "slugify";
 
 // get all products
 export const GET = async () => {
@@ -43,6 +44,7 @@ export const POST = async (req: NextRequest) => {
 
     const newProduct = await Product.create({
       title,
+      slug: slugify(title, { lower: true, strict: true }),
       price,
       category,
       description,

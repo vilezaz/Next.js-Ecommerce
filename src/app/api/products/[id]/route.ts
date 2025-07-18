@@ -4,6 +4,7 @@ import { Product } from "@/lib/models/Product";
 import { partialProductSchema } from "@/lib/validations/product";
 import { validateRequest } from "@/lib/validations/validateSchema";
 import { NextRequest, NextResponse } from "next/server";
+import slugify from "slugify";
 
 type Params = {
   params: {
@@ -40,10 +41,15 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
       image = product.image,
     } = validatedData;
 
+    const updatedSlug = validatedData.title
+      ? slugify(validatedData.title, { lower: true, strict: true })
+      : product.slug;
+
     const updateProduct = await Product.findByIdAndUpdate(
       id,
       {
         title,
+        slug: updatedSlug,
         description,
         category,
         price,
