@@ -2,14 +2,16 @@ import { getAllProducts } from "@/lib/api/products";
 import Image from "next/image";
 import React from "react";
 import ProductTitlePriceCard from "./ProductTitlePriceCard";
+import Link from "next/link";
 
 const ProductsCarousel = async () => {
   const products = await getAllProducts();
+  
   return (
     <div className="w-full overflow-x-auto">
       <div className="bg-[#171717] flex space-x-5 flex-nowrap scroll-animate">
         {products.map((product, _index) => (
-          <div
+          <Link href={`/products/${product.slug}`}
             key={product._id}
             className="bg-[#000000] min-w-[450px] mb-5 h-[30vh] rounded-md relative border hover:cursor-pointer border-transparent hover:border-blue-500 group">
             <Image
@@ -20,7 +22,7 @@ const ProductsCarousel = async () => {
             />
 
             <ProductTitlePriceCard product={product} />
-          </div>
+          </Link>
         ))}
       </div>
     </div>

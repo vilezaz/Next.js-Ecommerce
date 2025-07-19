@@ -2,6 +2,7 @@ import ProductsCarousel from "@/components/ProductsCarousel";
 import ProductTitlePriceCard from "@/components/ProductTitlePriceCard";
 import { getRandomProducts } from "@/lib/api/products";
 import Image from "next/image";
+import Link from "next/link";
 
 export const metadata = {
   title: "Zaz Store",
@@ -9,11 +10,14 @@ export const metadata = {
 
 export default async function HomePage() {
   const randomProducts = await getRandomProducts();
+  const slug = "printed-summer-shirt";
 
   return (
     <main className="min-h-[80vh] bg-[#171717]">
       <div className="flex space-x-5 mb-5">
-        <div className="bg-[#000000] w-4/6 h-[70vh] mx-5 rounded-md relative border hover:cursor-pointer border-transparent hover:border-blue-500 group">
+        <Link
+          href={`/products/${slug}`}
+          className="bg-[#000000] w-4/6 h-[70vh] mx-5 rounded-md relative border hover:cursor-pointer border-transparent hover:border-blue-500 group">
           <Image
             src="/products/shirts/shirt4.png"
             alt="Summer Shirt"
@@ -29,12 +33,13 @@ export default async function HomePage() {
               $19.75
             </strong>
           </div>
-        </div>
+        </Link>
         <div className="w-2/6 space-y-5 mr-5">
           {randomProducts.map((product, _index) => (
-            <div
+            <Link
+              href={`/products/${product.slug}`}
               key={product._id}
-              className="w-full h-[33.5vh] border hover:cursor-pointer border-transparent hover:border-blue-500 group bg-[#000000] rounded-md relative">
+              className="block w-full h-[33.5vh] border hover:cursor-pointer border-transparent hover:border-blue-500 group bg-[#000000] rounded-md relative">
               <Image
                 src={product.image}
                 alt={product.title}
@@ -44,7 +49,7 @@ export default async function HomePage() {
               />
 
               <ProductTitlePriceCard product={product} />
-            </div>
+            </Link>
           ))}
         </div>
       </div>

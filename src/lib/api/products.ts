@@ -1,7 +1,7 @@
 import { Product } from "@/types/product";
 
 export const getAllProducts = async (): Promise<Product[]> => {
-  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/products`, {
+  const res = await fetch(`${process.env.NEXT_API_URL}/api/products`, {
     cache: "no-cache",
   });
 
@@ -13,7 +13,7 @@ export const getProductByCategory = async (
   category: string
 ): Promise<Product[]> => {
   const res = await fetch(
-    `${process.env.NEXTAUTH_URL}/api/products/category/${category}`,
+    `${process.env.NEXT_API_URL}/api/products/category/${category}`,
     {
       cache: "no-cache",
     }
@@ -25,10 +25,26 @@ export const getProductByCategory = async (
 };
 
 export const getRandomProducts = async (): Promise<Product[]> => {
-  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/products/random`, {
+  const res = await fetch(`${process.env.NEXT_API_URL}/api/products/random`, {
     cache: "no-cache",
   });
 
+  if (!res.ok) throw new Error("Failed to fetch products");
+
   const data = await res.json();
   return data.products;
+};
+
+export const getProductDetails = async (slug: string): Promise<Product> => {
+  const res = await fetch(
+    `${process.env.NEXT_API_URL}/api/products/slug/${slug}`,
+    {
+      cache: "no-cache",
+    }
+  );
+
+  if (!res.ok) throw new Error("Failed to fetch products");
+
+  const data = await res.json();
+  return data.product;
 };

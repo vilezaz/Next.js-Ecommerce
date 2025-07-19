@@ -2,6 +2,7 @@ import { Product } from "@/types/product";
 import Image from "next/image";
 import React from "react";
 import ProductTitlePriceCard from "./ProductTitlePriceCard";
+import Link from "next/link";
 
 type Props = {
   product: Product;
@@ -9,7 +10,7 @@ type Props = {
 
 const ProductCard = ({ product }: Props) => {
   return (
-    <div className="relative bg-[#000000] text-white rounded-md shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 h-[350px] group hover:cursor-pointer border border-transparent hover:border-blue-500">
+    <Link href={`/products/${product.slug}`} className="relative bg-[#000000] text-white rounded-md shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 h-[350px] group hover:cursor-pointer border border-transparent hover:border-blue-500">
       <div className="relative w-full h-52 sm:h-64 md:h-72">
         <Image
           src={product.image}
@@ -24,7 +25,7 @@ const ProductCard = ({ product }: Props) => {
       <button className="absolute right-3 top-3 px-3 py-1.5 border-2 border-blue-500 rounded-3xl text-white bg-blue-500 font-semibold hover:cursor-pointer hover:bg-blue-600 transition-colors duration-200">
         Add To Cart
       </button>
-    </div>
+    </Link>
   );
 };
 
