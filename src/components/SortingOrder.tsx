@@ -6,8 +6,6 @@ const SortingOrder = () => {
     <aside className='px-8'>
       <strong className='text-gray-400 text-sm'>Sort by</strong>
       <div className='flex flex-col py-2 space-y-1'>
-        <Link className="hover:underline" href={""}>Relevance</Link>
-        <Link className="hover:underline" href={""}>Trending</Link>
         <Link className="hover:underline" href={""}>Price: Low to High</Link>
         <Link className="hover:underline" href={""}>Price: High to Low</Link>
       </div>
