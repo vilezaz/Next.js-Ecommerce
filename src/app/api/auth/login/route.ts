@@ -5,6 +5,7 @@ import { tokenSignIn } from "@/lib/utils/jwt";
 import { partialUserSchema } from "@/lib/validations/user";
 import { validateRequest } from "@/lib/validations/validateSchema";
 import bcrypt from "bcryptjs";
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest) => {
@@ -45,6 +46,12 @@ export const POST = async (req: NextRequest) => {
       );
 
     const token = tokenSignIn({ userId: userExists._id });
+
+    (await cookies()).set("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+    });
 
     return NextResponse.json(
       {

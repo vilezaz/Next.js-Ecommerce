@@ -6,6 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { User } from "@/lib/models/User";
 import { tokenSignIn } from "@/lib/utils/jwt";
+import { cookies } from "next/headers";
 
 export const POST = async (req: NextRequest) => {
   try {
@@ -41,6 +42,12 @@ export const POST = async (req: NextRequest) => {
     });
 
     const token = tokenSignIn({ id: user._id });
+
+    (await cookies()).set("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+    });
 
     return NextResponse.json(
       {
