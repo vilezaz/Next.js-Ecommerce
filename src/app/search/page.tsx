@@ -1,5 +1,5 @@
 import CollectionSidebar from "@/components/CollectionSidebar";
-import ProductCard from "@/components/ProductCard";
+import ProductCard from "@/components/products/ProductCard";
 import SortingOrder from "@/components/SortingOrder";
 import { getAllProducts, searchProducts } from "@/lib/api/products";
 import React from "react";
