@@ -1,4 +1,4 @@
-import { getAllProducts } from "@/lib/api/products";
+import { getAllProducts } from "@/lib/apiClient/products";
 import Image from "next/image";
 import React from "react";
 import ProductTitlePriceCard from "./ProductTitlePriceCard";

@@ -1,4 +1,4 @@
-import { getProductDetails } from "@/lib/api/products";
+import { getProductDetails } from "@/lib/apiClient/products";
 import { getSizesByCategory } from "@/lib/utils/products";
 import Image from "next/image";
 import React from "react";

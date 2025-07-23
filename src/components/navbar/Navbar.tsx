@@ -1,9 +1,13 @@
+"use client";
+
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { IoCartOutline } from "react-icons/io5";
 import Search from "./Search";
+import CartModel from "../cart/CartModel";
 
 const Navbar = () => {
+  const [cartOPen, setCartOpen] = useState(false);
   return (
     <nav className="flex items-center justify-between bg-[#171717] text-white py-5 px-10">
       <h1>
@@ -18,11 +22,11 @@ const Navbar = () => {
 
       <Search />
 
-      <div className="text-xl cursor-pointer">
-        <Link href="/cart">
-          <IoCartOutline />
-        </Link>
+      <div onClick={() => setCartOpen(true)} className="text-xl cursor-pointer">
+        <IoCartOutline />
       </div>
+
+      <CartModel isOpen={cartOPen} onClose={() => setCartOpen(false)} />
     </nav>
   );
 };
