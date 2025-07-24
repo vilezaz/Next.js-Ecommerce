@@ -7,14 +7,19 @@ interface Cart {
 }
 
 const CartModel = ({ isOpen, onClose }: Cart) => {
-  if (!isOpen) return null;
   return (
     <div
       onClick={onClose}
-      className="fixed inset-0 bg-black/50 z-50 cursor-pointer">
+      className={`fixed inset-0 z-50 cursor-pointer bg-black/50 transition-opacity duration-100 ${
+        isOpen
+          ? "opacity-100 pointer-events-auto"
+          : "opacity-0 pointer-events-none"
+      }`}>
       <div
         onClick={(e) => e.stopPropagation()}
-        className="absolute border border-gray-800 right-0 top-0 cursor-default backdrop-blur-3xl h-full w-[400px] p-4 rounded-md shadow-xl transition-all duration-300">
+        className={`absolute right-0 top-0 h-full w-[400px] border border-gray-800 cursor-default backdrop-blur-3xl p-4 rounded-md shadow-xl transition-transform duration-300 ${
+          isOpen ? "translate-x-0" : "translate-x-full"
+        } transform`}>
         <div className="flex justify-between items-center mb-4 mx-5 mt-2.5">
           <h2 className="text-lg font-bold">My Cart</h2>
           <button onClick={onClose}>
