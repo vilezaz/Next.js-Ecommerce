@@ -2,6 +2,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import Search from "./Search";
 import Cart from "./Cart";
+import LoginBtn from "./SignInBtn";
 
 const Navbar = () => {
   return (
@@ -17,7 +18,10 @@ const Navbar = () => {
       </div>
 
       <Search />
-      <Cart />
+      <div className="flex gap-4 items-center">
+        <Cart />
+        <LoginBtn />
+      </div>
     </nav>
   );
 };

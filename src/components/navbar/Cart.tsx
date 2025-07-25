@@ -7,8 +7,8 @@ const Cart = () => {
   const [cartOPen, setCartOpen] = useState(false);
   return (
     <>
-      <div onClick={() => setCartOpen(true)} className="text-xl cursor-pointer">
-        <IoCartOutline />
+      <div onClick={() => setCartOpen(true)} className="text-xl border rounded-sm p-1.5 border-gray-600 cursor-pointer group transition-all duration-300">
+        <IoCartOutline className="group-hover:scale-105 " />
       </div>
       <CartModel isOpen={cartOPen} onClose={() => setCartOpen(false)} />
     </>
