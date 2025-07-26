@@ -15,11 +15,20 @@ export const POST = async (req: NextRequest) => {
     const validatedData = await validateRequest(partialUserSchema, req);
     if (validatedData instanceof NextResponse) return validatedData;
 
-    const { name, email, password } = validatedData;
-    if (!name || !email || !password) {
+    const { email, password } = validatedData;
+    if (!email || !password) {
       return NextResponse.json(
         {
           message: "All fields are required",
+        },
+        { status: 400 }
+      );
+    }
+
+    if (password.length < 6) {
+      return NextResponse.json(
+        {
+          message: "Password must be at least 6 characters",
         },
         { status: 400 }
       );
@@ -36,7 +45,6 @@ export const POST = async (req: NextRequest) => {
     const hashPassword = await bcrypt.hash(password, 10);
 
     const user = await User.create({
-      name: name,
       email: email,
       password: hashPassword,
     });
