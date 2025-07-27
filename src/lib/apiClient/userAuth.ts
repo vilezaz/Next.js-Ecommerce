@@ -4,10 +4,11 @@ export const userSignUp = async (data: UserData) => {
   try {
     const res = await fetch(`http://localhost:3000/api/auth/signup`, {
       method: "POST",
-      body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
+      body: JSON.stringify(data),
     });
 
     if (!res.ok) {
@@ -25,10 +26,11 @@ export const userSignIn = async (data: UserData) => {
   try {
     const res = await fetch(`http://localhost:3000/api/auth/signin`, {
       method: "POST",
-      body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
+      body: JSON.stringify(data),
     });
 
     if (!res.ok) {

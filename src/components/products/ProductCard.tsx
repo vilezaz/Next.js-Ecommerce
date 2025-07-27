@@ -15,7 +15,7 @@ const ProductCard = ({ product }: Props) => {
         <Image
           src={product.image}
           alt={product.title} priority
-          fill   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="p-10 object-cover group-hover:scale-105 transition-all duration-400"
         />
       </div>

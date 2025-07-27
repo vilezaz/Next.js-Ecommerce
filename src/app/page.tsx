@@ -21,7 +21,7 @@ export default async function HomePage() {
           <Image
             src="/products/shirts/shirt4.png"
             alt="Summer Shirt"
-            fill
+            fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority
             className="object-contain p-16 group-hover:scale-105 transition-all duration-400"
           />
@@ -43,7 +43,7 @@ export default async function HomePage() {
               <Image
                 src={product.image}
                 alt={product.title}
-                fill
+                fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 priority
                 className="object-contain p-2 group-hover:scale-105 transition-all duration-400"
               />
