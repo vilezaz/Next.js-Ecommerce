@@ -6,11 +6,13 @@ import {
   UserFormSchemaSignIn,
 } from "@/lib/validations/clientUserZod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 const SignInForm = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -25,6 +27,8 @@ const SignInForm = () => {
       const res = await userSignIn(data);
       toast.success("Signed in successfully!");
       reset();
+      router.push("/");
+      router.refresh();
     } catch (error: any) {
       toast.error(error.message || "SignIn failed");
     }

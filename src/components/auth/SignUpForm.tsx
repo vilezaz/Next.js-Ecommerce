@@ -10,8 +10,10 @@ import {
 import { toast } from "react-toastify";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 
 const SignUpForm = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -27,6 +29,8 @@ const SignUpForm = () => {
       const res = await userSignUp(restData);
       toast.success("Signed up successfully!");
       reset();
+      router.push("/");
+      router.refresh();
     } catch (error: any) {
       toast.error(error.message || "Signup failed");
     }

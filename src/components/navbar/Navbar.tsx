@@ -4,15 +4,11 @@ import Search from "./Search";
 import LoginBtn from "./SignInBtn";
 import { getCurrentUser } from "@/lib/utils/currentUser";
 import CartBtn from "./CartBtn";
-import UserProfileBtn from "./UserProfileBtn";
+import SignOutBtn from "./SignOutBtn";
 
 const Navbar = async () => {
   const user = await getCurrentUser();
 
-  const getName = (): string => {
-    const emailWord = user.email.split("@")[0];
-    return emailWord[0].toUpperCase();
-  };
   return (
     <nav className="flex select-none items-center justify-between bg-[#171717] text-white py-5 px-10">
       <h1>
@@ -28,11 +24,7 @@ const Navbar = async () => {
       <Search />
       <div className="flex gap-4 items-center">
         <CartBtn />
-        {user ? (
-          <UserProfileBtn getName={getName} />
-        ) : (
-          <LoginBtn />
-        )}
+        {user ? <SignOutBtn /> : <LoginBtn />}
       </div>
     </nav>
   );
