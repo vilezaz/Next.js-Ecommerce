@@ -1,23 +1,19 @@
 "use client";
 
+import { useAuth } from "@/context/AuthContext";
 import { addToCart } from "@/lib/apiClient/cart";
 import React from "react";
 import toast from "react-hot-toast";
 
-const AddToCartBtn = ({
-  productId,
-  isAuthenticated,
-}: {
-  productId: string;
-  isAuthenticated: boolean;
-}) => {
+const AddToCartBtn = ({ productId }: { productId: string }) => {
+  const user = useAuth();
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     e.preventDefault();
   };
 
   const addProductToCart = async () => {
-    if (!isAuthenticated) {
+    if (!user) {
       toast.error("Please signin first");
       return;
     }

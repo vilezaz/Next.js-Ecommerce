@@ -9,7 +9,7 @@ const CartBtn = () => {
     <>
       <div onClick={() => setCartOpen(true)} className="text-xl border rounded-sm p-1.5 border-gray-600 cursor-pointer group transition-all duration-300">
         <IoCartOutline className="group-hover:scale-105 " />
-      </div>
+      </div>  
       <CartModel isOpen={cartOpen} onClose={() => setCartOpen(false)} />
     </>
   );

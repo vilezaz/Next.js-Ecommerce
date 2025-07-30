@@ -4,15 +4,13 @@ import React from "react";
 import ProductTitlePriceCard from "./ProductTitlePriceCard";
 import Link from "next/link";
 import AddToCartBtn from "./AddToCartBtn";
-import { getCurrentUser } from "@/lib/utils/currentUser";
 
 type Props = {
   product: Product;
 };
 
 const ProductCard = async ({ product }: Props) => {
-  const user = await getCurrentUser();
-  const isAuthenticated = !!user?._id;
+
   return (
     <Link
       href={`/products/${product.slug}`}
@@ -30,7 +28,7 @@ const ProductCard = async ({ product }: Props) => {
 
       <ProductTitlePriceCard product={product} source="productCard" />
 
-      <AddToCartBtn isAuthenticated={isAuthenticated} productId={product._id} />
+      <AddToCartBtn productId={product._id} />
     </Link>
   );
 };
