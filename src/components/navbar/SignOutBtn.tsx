@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 
 const SignOutBtn = () => {
   const router = useRouter();
+  
   const handleSignOut = async () => {
     try {
       await userSignOut();

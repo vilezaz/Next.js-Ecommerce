@@ -9,13 +9,12 @@ export const metadata = {
 };
 
 type Props = {
-  searchParams: {
-    query?: string;
-  };
+  searchParams: Promise<{ query?: string }>;
 };
 
 const AllProductsPage = async ({ searchParams }: Props) => {
-  const query = searchParams.query || "";
+  const sp = await searchParams;
+  const query = sp.query || "";
   const products = query ? await searchProducts(query) : await getAllProducts();
 
   const productNotFound = () => {
