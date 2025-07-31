@@ -1,17 +1,19 @@
 "use client";
 
-import { userSignIn } from "@/lib/apiClient/userAuth";
 import {
   UserSignInFormData,
   UserFormSchemaSignIn,
 } from "@/lib/validations/clientUserZod";
+import { signInUser } from "@/redux/auth/authThunk";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
 const SignInForm = () => {
+  const dispatch = useDispatch<any>();
   const router = useRouter();
   const {
     register,
@@ -24,7 +26,7 @@ const SignInForm = () => {
 
   const onSubmit = async (data: UserSignInFormData) => {
     try {
-      const res = await userSignIn(data);
+      await dispatch(signInUser(data)).unwrap();
       toast.success("Signed in successfully!");
       reset();
       router.push("/");

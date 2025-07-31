@@ -1,23 +1,24 @@
 "use client";
 
-import { useAuth } from "@/context/AuthContext";
 import { addToCart } from "@/lib/apiClient/cart";
+import { RootState } from "@/redux/store";
 import React from "react";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const AddToCartBtn = ({ productId }: { productId: string }) => {
-  const user = useAuth();
+  const { user, loading } = useSelector((state: RootState) => state.auth);
+  
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     e.preventDefault();
   };
 
   const addProductToCart = async () => {
-    if (!user) {
+    if (!loading && !user) {
       toast.error("Please signin first");
       return;
     }
-
     try {
       await addToCart({ productId, quantity: 1, size: "M" });
       toast.success("Added to cart");

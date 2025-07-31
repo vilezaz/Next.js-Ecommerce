@@ -2,7 +2,6 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { userSignUp } from "@/lib/apiClient/userAuth";
 import {
   userSignUpFormSchema,
   UserSignUpFormData,
@@ -11,8 +10,11 @@ import { toast } from "react-toastify";
 
 import React from "react";
 import { useRouter } from "next/navigation";
+import { signUpUser } from "@/redux/auth/authThunk";
+import { useDispatch } from "react-redux";
 
 const SignUpForm = () => {
+  const dispatch = useDispatch<any>();
   const router = useRouter();
   const {
     register,
@@ -26,7 +28,7 @@ const SignUpForm = () => {
   const onSubmit = async (data: UserSignUpFormData) => {
     const { confirmPassword, ...restData } = data;
     try {
-      const res = await userSignUp(restData);
+      await dispatch(signUpUser(restData)).unwrap();
       toast.success("Signed up successfully!");
       reset();
       router.push("/");

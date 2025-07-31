@@ -1,16 +1,18 @@
 "use client";
 
-import { userSignOut } from "@/lib/apiClient/userAuth";
+import { signOutUser } from "@/redux/auth/authThunk";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
 const SignOutBtn = () => {
+  const dispatch = useDispatch<any>();
   const router = useRouter();
-  
+
   const handleSignOut = async () => {
     try {
-      await userSignOut();
+      await dispatch(signOutUser()).unwrap();
       router.refresh();
       toast.success("Signed out successfully!");
     } catch (error) {

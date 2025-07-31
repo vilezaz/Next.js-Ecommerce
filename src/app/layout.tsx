@@ -5,8 +5,10 @@ import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/Footer";
 import { ToastContainer } from "react-toastify";
 import { Toaster } from "react-hot-toast";
-import { AuthProvider } from "@/context/AuthContext";
 import { getCurrentUser } from "@/lib/utils/currentUser";
+import { Provider } from "react-redux";
+import { store } from "@/redux/store";
+import { ReduxProvider } from "./providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,17 +32,16 @@ export default async function RootLayout({
 }>) {
   const user = await getCurrentUser();
 
-  const plainUser = JSON.parse(JSON.stringify(user));
-  return (  
+  return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ToastContainer />
         <Toaster />
-        <Navbar />
-        <AuthProvider userServer={plainUser}>
+        <ReduxProvider user={user}>
+          <Navbar />
           <main className="min-h-[80vh]">{children}</main>
-        </AuthProvider>
+        </ReduxProvider>
         <Footer />
       </body>
     </html>

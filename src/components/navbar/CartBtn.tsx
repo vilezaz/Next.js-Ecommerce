@@ -12,7 +12,7 @@ const CartBtn = () => {
       </div>  
       <CartModel isOpen={cartOpen} onClose={() => setCartOpen(false)} />
     </>
-  );
+  );  
 };
 
 export default CartBtn;

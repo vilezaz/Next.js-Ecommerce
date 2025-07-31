@@ -7,8 +7,10 @@ export const getCurrentUser = async () => {
   if (!token) return null;
   try {
     const decoded = verifyToken(token);
-    const user = User.findById(decoded.userId).select("-password");
-    return user;
+    const user = await User.findById(decoded.userId)
+      .select("-password")
+      .populate("cart.product");
+    return JSON.parse(JSON.stringify(user));
   } catch (error) {
     return null;
   }

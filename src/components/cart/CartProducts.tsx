@@ -1,9 +1,21 @@
-import React from 'react'
+import React from "react";
+import SingleCartProduct from "./SingleCartProduct";
+import { CartItem } from "@/types/cartItem";
 
-const CartProducts = () => {
+const CartProducts = ({ user }: { user: any }) => {
   return (
-    <div>CartProducts</div>
-  )
-}
+    <div>
+      {user.cart.length > 0 ? (
+        <div className="flex flex-col gap-2 mt-10">
+          {user.cart.map((product: CartItem) => (
+            <SingleCartProduct item={product} key={product.product._id} />
+          ))}
+        </div>
+      ) : (
+        "Cart is empty"
+      )}
+    </div>
+  );
+};
 
-export default CartProducts
+export default CartProducts;
