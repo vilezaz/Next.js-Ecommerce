@@ -9,12 +9,14 @@ import { fetchCart } from "@/redux/auth/cartThunks";
 function HydrateUser({ user }: { user: any }) {
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    if (user) {
-      dispatch(setUser(user));
-      dispatch(fetchCart());
-    }
+    const hydrate = async () => {
+      if (user) {
+        dispatch(setUser(user));
+        await dispatch(fetchCart());
+      }
+    };
+    hydrate();
   }, [user, dispatch]);
-
   return null;
 }
 

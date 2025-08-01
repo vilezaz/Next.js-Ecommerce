@@ -14,7 +14,7 @@ export const POST = async (req: NextRequest) => {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
-    const user = await User.findById(userId).populate("cart");
+    const user = await User.findById(userId).populate("cart.product");
     if(!user.cart ||user.cart.length === 0) {
       return NextResponse.json({
         message: "Cart is empty"

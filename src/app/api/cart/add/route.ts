@@ -57,7 +57,7 @@ export const POST = async (req: NextRequest) => {
       existingCartItem.quantity += safeQuantity;
       await user.save();
     } else {
-      user.cart.push({ product: productId, safeQuantity, size });
+      user.cart.push({ product: productId, quantity: safeQuantity, size });
       await user.save();
       ``;
     }

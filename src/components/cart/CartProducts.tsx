@@ -5,20 +5,18 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 
 const CartProducts = () => {
-  const { items } = useSelector((state: RootState) => state.cart);
-  console.log(items);
-  
+  const { items, loading } = useSelector((state: RootState) => state.cart);
+
+  if (loading) return <p>Loading cart...</p>;
+  if (items.length === 0) return <p>Your cart is empty</p>;
+
   return (
     <div>
-      {items.length > 0 ? (
-        <div className="flex flex-col gap-2 mt-10">
-          {items.map((product: CartItem) => (
-            <SingleCartProduct item={product} key={product.product._id} />
-          ))}
-        </div>
-      ) : (
-        "Cart is empty"
-      )}
+      <div className="flex flex-col gap-2 mt-10">
+        {items.map((product: CartItem) => (
+          <SingleCartProduct item={product} key={product.product._id} />
+        ))}
+      </div>
     </div>
   );
 };
