@@ -1,14 +1,23 @@
 "use client";
 
 import { addToCart, fetchCart } from "@/redux/auth/cartThunks";
+import { openCart } from "@/redux/slices/modalSlice";
 import { AppDispatch, RootState } from "@/redux/store";
 import React from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 
-const AddToCartBtn = ({ productId }: { productId: string }) => {
+const AddToCartBtn = ({
+  productId,
+  category,
+}: {
+  productId: string;
+  category: string;
+}) => {
   const { user, loading } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch<AppDispatch>();
+
+  const size = category === "shoes" ? "8" : "M";
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -21,8 +30,9 @@ const AddToCartBtn = ({ productId }: { productId: string }) => {
       return;
     }
     try {
-      await dispatch(addToCart({ productId, quantity: 1, size: "M" })).unwrap();
+      await dispatch(addToCart({ productId, quantity: 1, size })).unwrap();
       await dispatch(fetchCart()).unwrap();
+      dispatch(openCart());
       toast.success("Added to cart");
     } catch (error: any) {
       toast.error(error.message || "Error occured while adding to cart");
