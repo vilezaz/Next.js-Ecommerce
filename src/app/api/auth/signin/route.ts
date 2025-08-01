@@ -24,8 +24,8 @@ export const POST = async (req: NextRequest) => {
       );
     }
 
-    const userExists = await User.findOne({ email });
-    if (!userExists) {
+    const user = await User.findOne({ email });
+    if (!user) {
       return NextResponse.json(
         {
           message: "User with this email does not exist",
@@ -36,7 +36,7 @@ export const POST = async (req: NextRequest) => {
 
     const isPasswordCorrect = await bcrypt.compare(
       password,
-      userExists.password
+      user.password
     );
 
     if (!isPasswordCorrect)
@@ -45,7 +45,7 @@ export const POST = async (req: NextRequest) => {
         { status: 401 }
       );
 
-    const token = tokenSignIn({ userId: userExists._id });
+    const token = tokenSignIn({ userId: user._id });
 
     (await cookies()).set("token", token, {
       httpOnly: true,
@@ -57,7 +57,7 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json(
       {
         message: "Login successful",
-        userExists,
+        user,
         token,
       },
       { status: 200 }

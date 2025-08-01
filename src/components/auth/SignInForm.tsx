@@ -30,7 +30,6 @@ const SignInForm = () => {
       toast.success("Signed in successfully!");
       reset();
       router.push("/");
-      router.refresh();
     } catch (error: any) {
       toast.error(error.message || "SignIn failed");
     }

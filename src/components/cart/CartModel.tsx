@@ -40,7 +40,7 @@ const CartModel = ({ isOpen, onClose }: Cart) => {
         </div>
         <div className="px-5">
           {!loading && user ? (
-            <CartProducts user={user} />
+            <CartProducts />
           ) : (
             <p>Plz login to see your cart</p>
           )}

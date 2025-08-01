@@ -5,10 +5,8 @@ import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/Footer";
 import { ToastContainer } from "react-toastify";
 import { Toaster } from "react-hot-toast";
+import ReduxProvider from "./providers";
 import { getCurrentUser } from "@/lib/utils/currentUser";
-import { Provider } from "react-redux";
-import { store } from "@/redux/store";
-import { ReduxProvider } from "./providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +29,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const user = await getCurrentUser();
-
   return (
     <html lang="en">
       <body

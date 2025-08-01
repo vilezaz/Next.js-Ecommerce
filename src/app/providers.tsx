@@ -1,11 +1,24 @@
 "use client";
 
-import { setUser } from "@/redux/slices/authSlice";
-import { store } from "@/redux/store";
-import React, { useEffect } from "react";
 import { Provider, useDispatch } from "react-redux";
+import { AppDispatch, store } from "@/redux/store";
+import { useEffect } from "react";
+import { setUser } from "@/redux/slices/authSlice";
+import { fetchCart } from "@/redux/auth/cartThunks";
 
-export function ReduxProvider({
+function HydrateUser({ user }: { user: any }) {
+  const dispatch = useDispatch<AppDispatch>();
+  useEffect(() => {
+    if (user) {
+      dispatch(setUser(user));
+      dispatch(fetchCart());
+    }
+  }, [user, dispatch]);
+
+  return null;
+}
+
+export default function ReduxProvider({
   children,
   user,
 }: {
@@ -18,16 +31,4 @@ export function ReduxProvider({
       {children}
     </Provider>
   );
-}
-
-function HydrateUser({ user }: { user: any }) {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (user) {
-      dispatch(setUser(user));
-    }
-  }, [user, dispatch]);
-
-  return null;
 }
