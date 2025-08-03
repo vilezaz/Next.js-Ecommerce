@@ -1,3 +1,4 @@
+"use client";
 import { CartItem } from "@/types/cartItem";
 import Image from "next/image";
 import { HiMinusSm, HiOutlinePlusSm } from "react-icons/hi";
@@ -7,9 +8,10 @@ interface Props {
   item: CartItem;
   onDecrease: (productId: string, size: string) => void;
   onIncrease: (productId: string, size: string) => void;
+  disabled?: boolean;
 }
 
-const SingleCartProduct = ({ item, onDecrease, onIncrease }: Props) => {
+const SingleCartProduct = ({ item, onDecrease, onIncrease, disabled }: Props) => {
   const { product, quantity, size } = item;
 
   return (
@@ -30,13 +32,20 @@ const SingleCartProduct = ({ item, onDecrease, onIncrease }: Props) => {
       <div className="flex flex-col items-center gap-2">
         <div className="flex items-center gap-3 px-3 py-1.5 border border-gray-700 rounded-full">
           <button
+            disabled={disabled}
             className="text-white hover:text-red-400 transition"
             onClick={() => onDecrease(product._id, size)}
           >
             <HiMinusSm className="text-lg" />
           </button>
-          <span className="text-sm text-white font-semibold">{quantity}</span>
-          <button onClick={() => onIncrease(product._id, size)} className="text-white hover:text-green-400 transition">
+          <span className="text-sm text-white font-semibold min-w-[16px] text-center">
+            {quantity}
+          </span>
+          <button
+            disabled={disabled}
+            onClick={() => onIncrease(product._id, size)}
+            className="text-white hover:text-green-400 transition"
+          >
             <HiOutlinePlusSm className="text-lg" />
           </button>
         </div>
