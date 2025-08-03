@@ -69,6 +69,7 @@ export const POST = async (req: NextRequest) => {
     }
 
     await user.save();
+    await user.populate("cart.product");
 
     return NextResponse.json(
       {

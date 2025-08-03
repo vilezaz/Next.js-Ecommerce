@@ -13,6 +13,7 @@ export const fetchCart = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const res = await api.post("/api/cart/fetchcart");
+      console.log(res.data.cart);
       return res.data.cart;
     } catch (error: any) {
       return rejectWithValue(
@@ -28,6 +29,37 @@ export const addToCart = createAsyncThunk(
   async (data: addToCartPayload, { rejectWithValue }) => {
     try {
       const res = await api.post("/api/cart/add", data);
+      return res.data.cart;
+    } catch (error: any) {
+      return rejectWithValue(
+        error.response?.data?.message || "failed to fetch cart"
+      );
+    }
+  }
+);
+
+// DECREASE  CART
+export const decreaseCart = createAsyncThunk(
+  "cart/decreaseCart",
+  async (data: addToCartPayload, { rejectWithValue }) => {
+    try {
+      const res = await api.post("/api/cart/decrease", data);
+      console.log(res.data.cart);
+      return res.data.cart;
+    } catch (error: any) {
+      return rejectWithValue(
+        error.response?.data?.message || "failed to fetch cart"
+      );
+    }
+  }
+);
+
+// REMOVE CART
+export const removeFromCart = createAsyncThunk(
+  "cart/removeFromCart",
+  async (data: addToCartPayload, { rejectWithValue }) => {
+    try {
+      const res = await api.post("/api/cart/remove", data);
       return res.data;
     } catch (error: any) {
       return rejectWithValue(

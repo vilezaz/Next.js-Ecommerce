@@ -59,8 +59,10 @@ export const POST = async (req: NextRequest) => {
     } else {
       user.cart.push({ product: productId, quantity: safeQuantity, size });
       await user.save();
-      ``;
     }
+
+    await user.save();
+    await user.populate("cart.product");
 
     return NextResponse.json(
       {

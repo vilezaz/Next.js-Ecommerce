@@ -1,6 +1,6 @@
 import { CartItem } from "@/types/cartItem";
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCart } from "../auth/cartThunks";
+import { addToCart, decreaseCart, fetchCart, removeFromCart } from "../auth/cartThunks";
 
 interface CartState {
   items: CartItem[];
@@ -21,9 +21,6 @@ const cartSlice = createSlice({
     setCartItems(state, action) {
       state.items = action.payload;
     },
-    addToCart(state, action) {
-      state.items.push(action.payload);
-    },
     clearCart(state) {
       state.items = [];
     },
@@ -41,9 +38,45 @@ const cartSlice = createSlice({
       .addCase(fetchCart.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
+      })
+      .addCase(addToCart.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(addToCart.fulfilled, (state, action) => {
+        state.loading = false;
+        state.items = action.payload;
+      })
+      .addCase(addToCart.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(decreaseCart.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(decreaseCart.fulfilled, (state, action) => {
+        state.loading = false;
+        state.items = action.payload;
+      })
+      .addCase(decreaseCart.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(removeFromCart.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(removeFromCart.fulfilled, (state, action) => {
+        state.loading = false;
+        state.items = action.payload;
+      })
+      .addCase(removeFromCart.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
       });
   },
 });
 
-export const { setCartItems, addToCart, clearCart } = cartSlice.actions;
+export const { setCartItems, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;

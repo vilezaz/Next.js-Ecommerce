@@ -1,6 +1,6 @@
 "use client";
 
-import { addToCart, fetchCart } from "@/redux/auth/cartThunks";
+import { addToCart } from "@/redux/auth/cartThunks";
 import { openCart } from "@/redux/slices/modalSlice";
 import { AppDispatch, RootState } from "@/redux/store";
 import React from "react";
@@ -31,7 +31,6 @@ const AddToCartBtn = ({
     }
     try {
       await dispatch(addToCart({ productId, quantity: 1, size })).unwrap();
-      await dispatch(fetchCart()).unwrap();
       dispatch(openCart());
       toast.success("Added to cart");
     } catch (error: any) {

@@ -1,22 +1,45 @@
+"use client";
 import React from "react";
 import SingleCartProduct from "./SingleCartProduct";
-import { CartItem } from "@/types/cartItem";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, AppDispatch } from "@/redux/store";
+import { addToCart, decreaseCart } from "@/redux/auth/cartThunks";
+import toast from "react-hot-toast";
 
 const CartProducts = () => {
-  const { items, loading } = useSelector((state: RootState) => state.cart);
+  const { items } = useSelector((state: RootState) => state.cart);
+  const dispatch = useDispatch<AppDispatch>();
 
-  if (loading) return <p>Loading cart...</p>;
-  if (items.length === 0) return <p>Your cart is empty</p>;
+  const handleDecrease = async (productId: string, size: string) => {
+    try {
+      await dispatch(decreaseCart({ productId, quantity: 1, size })).unwrap();
+    } catch (error) {
+      toast.error("error removing item from cart");
+    }
+  };
+
+  const handleIncrease = async (productId: string, size: string) => {
+    try {
+      await dispatch(addToCart({ productId, quantity: 1, size })).unwrap();
+    } catch (error) {
+      toast.error("error removing item from cart");
+    }
+  };
+
+  if (!items || items.length === 0) {
+    return <p className="text-white mt-10">Your cart is empty</p>;
+  }
 
   return (
-    <div>
-      <div className="flex flex-col gap-2 mt-10">
-        {items.map((product: CartItem) => (
-          <SingleCartProduct item={product} key={product.product._id} />
-        ))}
-      </div>
+    <div className="flex flex-col gap-2 mt-10">
+      {items.map((item, index) => (
+        <SingleCartProduct
+          key={index}
+          item={item}
+          onDecrease={handleDecrease}
+          onIncrease={handleIncrease}
+        />
+      ))}
     </div>
   );
 };

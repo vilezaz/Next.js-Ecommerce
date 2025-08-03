@@ -12,7 +12,11 @@ function HydrateUser({ user }: { user: any }) {
     const hydrate = async () => {
       if (user) {
         dispatch(setUser(user));
-        await dispatch(fetchCart());
+        try {
+          await dispatch(fetchCart());
+        } catch (error) {
+          throw new Error("Failed to fetch cart");
+        }
       }
     };
     hydrate();
