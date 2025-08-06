@@ -13,7 +13,6 @@ export const fetchCart = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const res = await api.post("/api/cart/fetchcart");
-      console.log(res.data.cart);
       return res.data.cart;
     } catch (error: any) {
       return rejectWithValue(
@@ -44,7 +43,6 @@ export const decreaseCart = createAsyncThunk(
   async (data: addToCartPayload, { rejectWithValue }) => {
     try {
       const res = await api.post("/api/cart/decrease", data);
-      console.log(res.data.cart);
       return res.data.cart;
     } catch (error: any) {
       return rejectWithValue(

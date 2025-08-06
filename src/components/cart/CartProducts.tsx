@@ -1,11 +1,17 @@
 "use client";
-import React, { useEffect, useState, useOptimistic, useTransition } from "react";
+import React, {
+  useEffect,
+  useState,
+  useOptimistic,
+  useTransition,
+} from "react";
 import SingleCartProduct from "./SingleCartProduct";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "@/redux/store";
 import { addToCart, decreaseCart } from "@/redux/auth/cartThunks";
 import toast from "react-hot-toast";
 import { CartItem } from "@/types/cartItem";
+import ProductsCheckout from "../products/ProductsCheckout";
 
 const CartProducts = () => {
   const reduxItems = useSelector((state: RootState) => state.cart.items);
@@ -70,22 +76,39 @@ const CartProducts = () => {
     });
   };
 
+  const totalPayment = (): number => {
+    let totalQty = 0;
+    let totalAmount = 0;
+    cachedItems.map((item) => {
+      totalQty += item.quantity;
+    });
+
+    cachedItems.map((item) => {
+      totalAmount += item.quantity * item.product.price;
+    });
+
+    return totalAmount;
+  };
+
   if (!optimisticItems || optimisticItems.length === 0) {
     return <p className="text-white mt-10">Your cart is empty</p>;
   }
 
   return (
-    <div className="flex flex-col gap-2 mt-10">
-      {optimisticItems.map((item, index) => (
-        <SingleCartProduct
-          key={`${item.product._id}-${item.size}`}
-          item={item}
-          onDecrease={handleDecrease}
-          onIncrease={handleIncrease}
-          disabled={isPending}
-        />
-      ))}
-    </div>
+    <>
+      <div className="flex flex-col gap-2 mt-10 h-[50vh] overflow-y-auto pr-1">
+        {optimisticItems.map((item, index) => (
+          <SingleCartProduct
+            key={`${item.product._id}-${item.size}`}
+            item={item}
+            onDecrease={handleDecrease}
+            onIncrease={handleIncrease}
+            disabled={isPending}
+          />
+        ))}
+      </div>
+      <ProductsCheckout totalAmount={totalPayment} />
+    </>
   );
 };
 

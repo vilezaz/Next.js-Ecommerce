@@ -26,13 +26,13 @@ const SingleCartProduct = ({ item, onDecrease, onIncrease, disabled }: Props) =>
 
       <div className="flex-1 text-white">
         <p className="font-medium">{product.title}</p>
-        <p className="text-sm text-gray-400">${product.price}</p>
+        <p className="text-xs text-gray-400">Size: {size}</p>
       </div>
 
       <div className="flex flex-col items-center gap-2">
+        <p className="text-sm font-bold text-gray-400">${(product.price * quantity).toFixed(2)}</p>
         <div className="flex items-center gap-3 px-3 py-1.5 border border-gray-700 rounded-full">
           <button
-            disabled={disabled}
             className="text-white hover:text-red-400 transition"
             onClick={() => onDecrease(product._id, size)}
           >
@@ -42,14 +42,13 @@ const SingleCartProduct = ({ item, onDecrease, onIncrease, disabled }: Props) =>
             {quantity}
           </span>
           <button
-            disabled={disabled}
             onClick={() => onIncrease(product._id, size)}
             className="text-white hover:text-green-400 transition"
           >
             <HiOutlinePlusSm className="text-lg" />
           </button>
         </div>
-        <p className="text-xs text-gray-400">Size: {size}</p>
+        
       </div>
     </div>
   );
