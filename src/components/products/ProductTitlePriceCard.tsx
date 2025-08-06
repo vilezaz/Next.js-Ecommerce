@@ -1,5 +1,6 @@
 import { Product } from "@/types/product";
 import React from "react";
+import { BiDollar } from "react-icons/bi";
 
 type Props = {
   product: Product,
@@ -12,8 +13,8 @@ const ProductTitlePriceCard = ({ product, source }: Props) => {
       <h3 className=" text-gray-300 text-sm px-2 font-semibold truncate">
         {product.title}
       </h3>
-      <strong className="block bg-green-900 text-sm text-white px-3 m-0.5 py-1.5 rounded-3xl">
-        ${product.price.toFixed(2)}
+      <strong className="flex items-center bg-green-900 text-sm text-white px-3 m-0.5 py-1.5 rounded-3xl">
+        <BiDollar />{product.price.toFixed(2)}
       </strong>
     </div>
   );

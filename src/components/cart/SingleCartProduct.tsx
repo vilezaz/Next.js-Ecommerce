@@ -3,15 +3,15 @@ import { CartItem } from "@/types/cartItem";
 import Image from "next/image";
 import { HiMinusSm, HiOutlinePlusSm } from "react-icons/hi";
 import React from "react";
+import { BiDollar } from "react-icons/bi";
 
 interface Props {
   item: CartItem;
   onDecrease: (productId: string, size: string) => void;
   onIncrease: (productId: string, size: string) => void;
-  disabled?: boolean;
 }
 
-const SingleCartProduct = ({ item, onDecrease, onIncrease, disabled }: Props) => {
+const SingleCartProduct = ({ item, onDecrease, onIncrease }: Props) => {
   const { product, quantity, size } = item;
 
   return (
@@ -30,12 +30,14 @@ const SingleCartProduct = ({ item, onDecrease, onIncrease, disabled }: Props) =>
       </div>
 
       <div className="flex flex-col items-center gap-2">
-        <p className="text-sm font-bold text-gray-400">${(product.price * quantity).toFixed(2)}</p>
+        <p className="text-sm font-bold text-gray-400 flex items-center">
+          <BiDollar />
+          {(product.price * quantity).toFixed(2)}
+        </p>
         <div className="flex items-center gap-3 px-3 py-1.5 border border-gray-700 rounded-full">
           <button
             className="text-white hover:text-red-400 transition"
-            onClick={() => onDecrease(product._id, size)}
-          >
+            onClick={() => onDecrease(product._id, size)}>
             <HiMinusSm className="text-lg" />
           </button>
           <span className="text-sm text-white font-semibold min-w-[16px] text-center">
@@ -43,15 +45,13 @@ const SingleCartProduct = ({ item, onDecrease, onIncrease, disabled }: Props) =>
           </span>
           <button
             onClick={() => onIncrease(product._id, size)}
-            className="text-white hover:text-green-400 transition"
-          >
+            className="text-white hover:text-green-400 transition">
             <HiOutlinePlusSm className="text-lg" />
           </button>
         </div>
-        
       </div>
     </div>
   );
 };
 
-export default SingleCartProduct;
+export default React.memo(SingleCartProduct);

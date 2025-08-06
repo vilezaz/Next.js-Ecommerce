@@ -1,5 +1,6 @@
 "use client";
 
+import { useOptimisticCart } from "@/hooks/useOptimisticCart";
 import { addToCart } from "@/redux/auth/cartThunks";
 import { openCart } from "@/redux/slices/modalSlice";
 import { AppDispatch, RootState } from "@/redux/store";
@@ -16,6 +17,7 @@ const AddToCartBtn = ({
 }) => {
   const { user, loading } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch<AppDispatch>();
+  const { isPending, handleIncrease } = useOptimisticCart();
 
   const size = category === "shoes" ? "8" : "M";
 
@@ -30,7 +32,7 @@ const AddToCartBtn = ({
       return;
     }
     try {
-      await dispatch(addToCart({ productId, quantity: 1, size })).unwrap();
+      handleIncrease(productId, size);
       dispatch(openCart());
       toast.success("Added to cart");
     } catch (error: any) {

@@ -3,6 +3,7 @@ import ProductTitlePriceCard from "@/components/products/ProductTitlePriceCard";
 import { getRandomProducts } from "@/lib/apiClient/products";
 import Image from "next/image";
 import Link from "next/link";
+import { BiDollar } from "react-icons/bi";
 
 export const metadata = {
   title: "Zaz Store",
@@ -29,8 +30,8 @@ export default async function HomePage() {
             <h3 className=" text-gray-300 text-sm px-2 font-semibold truncate">
               Printed Summer Shirt
             </h3>
-            <strong className="block bg-green-900 text-sm text-white px-3 m-0.5 py-1.5 rounded-3xl">
-              $19.75
+            <strong className="flex items-center bg-green-900 text-sm text-white px-3 m-0.5 py-1.5 rounded-3xl">
+              <BiDollar /><span>19</span>
             </strong>
           </div>
         </Link>
