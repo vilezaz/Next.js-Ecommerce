@@ -11,11 +11,11 @@ const CartBtn = () => {
   const dispatch = useDispatch<AppDispatch>();
   return (
     <>
-      <div
+      <button
         onClick={() => dispatch(openCart())}
         className="text-xl border rounded-sm p-1.5 border-gray-600 cursor-pointer group transition-all duration-300">
         <IoCartOutline className="group-hover:scale-105 " />
-      </div>
+      </button>
       <CartModel isOpen={isCartOpen} onClose={() => dispatch(closeCart())} />
     </>
   );

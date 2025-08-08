@@ -5,10 +5,14 @@ import { IoSearch } from "react-icons/io5";
 import Form from "next/form";
 import { useSearchParams } from "next/navigation";
 
-const Search = () => {
+type Props = {
+  onSearch?: () => void;
+};
+
+const Search = ({ onSearch }: Props) => {
   const searchParams = useSearchParams();
   return (
-    <Form action="/search" className="flex items-center">
+    <Form onSubmit={onSearch} action="/search" className="flex items-center">
       <input
         name="query"
         key={searchParams.get("query")}
