@@ -45,7 +45,7 @@ const AddToCartBtn = ({
         handleClick(e);
         addProductToCart();
       }}
-      className="absolute right-3 top-3 px-3 py-1.5 border-2 border-blue-500 rounded-3xl text-white bg-blue-500 font-semibold hover:cursor-pointer hover:bg-blue-600 transition-colors duration-200">
+      className="absolute text-sm md:text-base right-3 top-3 px-3 py-1.5 border-2 border-blue-500 rounded-3xl text-white bg-blue-500 font-semibold hover:cursor-pointer hover:bg-blue-600 transition-colors duration-200">
       Add To Cart
     </button>
   );

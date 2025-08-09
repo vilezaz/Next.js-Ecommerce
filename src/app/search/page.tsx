@@ -28,12 +28,12 @@ const AllProductsPage = async ({ searchParams }: Props) => {
   };
 
   return (
-    <div className="flex bg-[#171717] min-h-[80vh] text-white py-5">
+    <div className="flex bg-[#171717] min-h-[80vh] text-white py-5 pt-20">
       <CollectionSidebar />
 
       {productNotFound() || (
         <>
-          <div className="grid grid-cols-3 gap-5 grow">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-5 grow">
             {products.map((product, _index) => {
               return <ProductCard key={product._id} product={product} />;
             })}

@@ -14,7 +14,7 @@ const ProductCard = async ({ product }: Props) => {
   return (
     <Link
       href={`/products/${product.slug}`}
-      className="relative bg-[#000000] text-white rounded-md shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 h-[350px] group hover:cursor-pointer border border-transparent hover:border-blue-500">
+      className="relative bg-[#000000] text-white rounded-md shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 h-[260px] md:h-[350px] group hover:cursor-pointer border border-transparent hover:border-blue-500">
       <div className="relative w-full h-52 sm:h-64 md:h-72">
         <Image
           src={product.image}
@@ -22,7 +22,7 @@ const ProductCard = async ({ product }: Props) => {
           priority
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="p-10 object-cover group-hover:scale-105 transition-all duration-400"
+          className="md:p-10 p-5 object-cover group-hover:scale-105 transition-all duration-400"
         />
       </div>
 

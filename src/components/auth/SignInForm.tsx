@@ -40,7 +40,7 @@ const SignInForm = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col gap-5 mt-5 text-white">
       <div className="flex flex-col gap-1">
-        <label htmlFor="email">Email</label>
+        <label className="text-sm" htmlFor="email">Email</label>
         <input
           {...register("email")}
           type="email"
@@ -55,7 +55,7 @@ const SignInForm = () => {
         )}
       </div>
       <div className="flex flex-col gap-1">
-        <label htmlFor="password">Password</label>
+        <label className="text-sm" htmlFor="password">Password</label>
         <input
           {...register("password")}
           type="password"

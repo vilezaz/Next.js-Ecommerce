@@ -25,14 +25,14 @@ const checkForYears = (): number | string => {
 const Footer = () => {
   return (
     <footer className="bg-[#171717] text-gray-400 flex items-center justify-between py-8 px-10">
-      <div className="flex items-center space-x-6">
-        <div className="flex items-center space-x-1.5">
+      <div className="flex items-center  space-x-6 md:flex-row flex-col">
+        <div className="flex items-center justify-between space-x-1.5">
           <BiSolidCopyright />
           <div>{checkForYears()}</div>
         </div>
         <p>All rights reserved</p>
       </div>
-      <div className="flex items-center space-x-1.5">
+      <div className="flex items-center justify-center flex-col md:flex-row space-x-1.5">
         <span>Created by</span>
         <a
           className="text-blue-500 hover:underline font-bold"

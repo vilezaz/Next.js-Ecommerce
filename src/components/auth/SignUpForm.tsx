@@ -42,7 +42,7 @@ const SignUpForm = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col gap-2 mt-5 text-white">
       <div className="flex flex-col">
-        <label htmlFor="email">Email</label>
+        <label className="text-sm" htmlFor="email">Email</label>
         <input
           {...register("email")}
           type="email"
@@ -58,7 +58,7 @@ const SignUpForm = () => {
       </div>
 
       <div className="flex flex-col">
-        <label htmlFor="password">Password</label>
+        <label className="text-sm" htmlFor="password">Password</label>
         <input
           {...register("password")}
           type="password"
@@ -75,7 +75,7 @@ const SignUpForm = () => {
         )}
       </div>
       <div className="flex flex-col">
-        <label htmlFor="password">Confirm Password</label>
+        <label className="text-sm" htmlFor="password">Confirm Password</label>
         <input
           {...register("confirmPassword")}
           type="password"
