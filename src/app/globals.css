@@ -14,7 +14,7 @@
 }
 
 .scroll-animate {
-  animation: infiniteScroll 20s linear infinite;
+  animation: infiniteScroll 10s linear infinite;
 }
 
 @keyframes infiniteScroll {

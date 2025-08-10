@@ -13,7 +13,7 @@ const ProductsCarousel = async () => {
         {products.map((product, _index) => (
           <Link href={`/products/${product.slug}`}
             key={product._id}
-            className="bg-[#000000] md:min-w-[450px] min-w-[250px] mb-5 h-[30vh] rounded-md relative border hover:cursor-pointer border-transparent hover:border-blue-500 group">
+            className="bg-[#000000] md:min-w-[450px] min-w-[250px] mb-5 h-[20vh] md:h-[30vh] rounded-md relative border hover:cursor-pointer border-transparent hover:border-blue-500 group">
             <Image
               src={product.image}
               alt={product.title}

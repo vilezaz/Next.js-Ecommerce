@@ -58,7 +58,7 @@ export const POST = async (req: NextRequest) => {
       cancel_url: `${process.env.NEXT_API_URL}/cancel`,
       billing_address_collection: "required",
       shipping_address_collection: {
-        allowed_countries: ["US", "CA", "IN"],
+        allowed_countries: ["US", "PK", "IN"],
       },
       metadata: {
         userId: user._id.toString(),

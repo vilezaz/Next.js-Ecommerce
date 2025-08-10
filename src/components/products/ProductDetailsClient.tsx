@@ -66,7 +66,7 @@ const ProductDetailsClient = ({ product, sizes }: Props) => {
               <button
                 key={index}
                 onClick={() => setSelectedSize(size)}
-                className={`text-xs sm:text-sm px-4 sm:px-5 py-1.5 sm:py-2 w-14 sm:w-16 rounded-full ${
+                className={`text-xs sm:text-sm px-4 sm:px-5 py-2 sm:py-2 w-14 sm:w-16 rounded-full ${
                   selectedSize === size ? "bg-blue-600" : "bg-[#171717]"
                 } hover:cursor-pointer border border-transparent hover:border-blue-500`}
               >

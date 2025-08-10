@@ -40,7 +40,7 @@ export default async function HomePage() {
             <Link
               href={`/products/${product.slug}`}
               key={product._id}
-              className="block md:w-full w-full h-[33.5vh] border hover:cursor-pointer border-transparent hover:border-blue-500 group bg-[#000000] rounded-md relative">
+              className="block md:w-full w-full h-[28vh] md:h-[33.5vh] border hover:cursor-pointer border-transparent hover:border-blue-500 group bg-[#000000] rounded-md relative">
               <Image
                 src={product.image}
                 alt={product.title}

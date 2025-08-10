@@ -18,8 +18,8 @@ const Navbar = () => {
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   return (
-    <nav className="bg-[#171717] text-white select-none fixed w-full z-50">
-      <div className="flex items-center justify-between md:py-5 py-1 px-4 md:px-10">
+    <nav className="bg-[#171717] text-white py-2 select-none fixed w-full z-50">
+      <div className="flex items-center justify-between md:py-2 py-1 px-4 md:px-10">
         <h1 className="text-lg md:text-xl font-bold">
           <Link href="/">ZAZ STORE.</Link>
         </h1>
