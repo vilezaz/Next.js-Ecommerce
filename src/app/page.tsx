@@ -14,7 +14,7 @@ export default async function HomePage() {
   const slug = "printed-summer-shirt";
 
   return (
-    <main className="min-h-[80vh] bg-[#171717]">
+    <main className="min-h-[90vh] bg-[#171717]">
       <div className="flex flex-col md:flex-row space-x-2 md:space-x-5 mb-5 pt-10 md:pt-20">
         <Link
           href={`/products/${slug}`}

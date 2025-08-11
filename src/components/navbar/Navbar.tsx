@@ -9,10 +9,18 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { IoClose } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const { user } = useSelector((state: RootState) => state.auth);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+
+  const pathname = usePathname();
+  const navLinks = [
+    { href: "/search", label: "All" },
+    { href: "/search/shirts", label: "Shirts" },
+    { href: "/search/shoes", label: "Shoes" },
+  ];
 
   const openMobileMenu = () => setIsMobileMenuOpen(true);
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
@@ -25,21 +33,22 @@ const Navbar = () => {
         </h1>
 
         <div className="hidden md:flex space-x-5 text-gray-400">
-          <Link href="/search" className="hover:text-white transition-colors">
-            All
-          </Link>
-          <Link
-            href="/search/shirts"
-            className="hover:text-white transition-colors"
-          >
-            Shirts
-          </Link>
-          <Link
-            href="/search/shoes"
-            className="hover:text-white transition-colors"
-          >
-            Shoes
-          </Link>
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`transition-colors ${
+                  isActive
+                    ? "text-blue-500 font-bold"
+                    : "text-gray-400 hover:text-white"
+                }`}>
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
 
         <div className="hidden md:block">
@@ -56,8 +65,7 @@ const Navbar = () => {
           <button
             onClick={openMobileMenu}
             className="p-2 rounded-md hover:bg-gray-700 transition-colors"
-            aria-label="Open mobile menu"
-          >
+            aria-label="Open mobile menu">
             <RxHamburgerMenu size={24} />
           </button>
         </div>
@@ -69,20 +77,17 @@ const Navbar = () => {
           isMobileMenuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
-        }`}
-      >
+        }`}>
         <div
           onClick={(e) => e.stopPropagation()}
           className={`absolute top-0 left-0 w-full sm:w-[400px] max-h-[80vh] bg-[#171717] border-b border-gray-800 backdrop-blur-3xl rounded-b-md shadow-xl transform transition-transform duration-300 ${
             isMobileMenuOpen ? "translate-y-0" : "-translate-y-full"
-          }`}
-        >
+          }`}>
           <div className="flex justify-between items-center mb-4 px-5 mt-2.5">
             <h2 className="text-lg font-bold">Menu</h2>
             <button
               className="text-xl border rounded-sm p-1.5 border-gray-600 cursor-pointer group transition-all duration-300"
-              onClick={closeMobileMenu}
-            >
+              onClick={closeMobileMenu}>
               <IoClose
                 className="cursor-pointer group-hover:scale-105"
                 size={24}
@@ -98,36 +103,31 @@ const Navbar = () => {
             <Link
               href="/search"
               className="px-4 py-0.5 text-gray-400 hover:text-white hover:bg-gray-700 transition-colors"
-              onClick={closeMobileMenu}
-            >
+              onClick={closeMobileMenu}>
               All
             </Link>
             <Link
               href="/search/shirts"
               className="px-4 py-0.5 text-gray-400 hover:text-white hover:bg-gray-700 transition-colors"
-              onClick={closeMobileMenu}
-            >
+              onClick={closeMobileMenu}>
               Shirts
             </Link>
             <Link
               href="/search/shoes"
               className="px-4 py-0.5 text-gray-400 hover:text-white hover:bg-gray-700 transition-colors"
-              onClick={closeMobileMenu}
-            >
+              onClick={closeMobileMenu}>
               Shoes
             </Link>
             <Link
               href="/search/pants"
               className="px-4 py-0.5 text-gray-400 hover:text-white hover:bg-gray-700 transition-colors"
-              onClick={closeMobileMenu}
-            >
+              onClick={closeMobileMenu}>
               Pants
             </Link>
             <Link
               href="/search/caps"
               className="px-4 py-0.5 text-gray-400 hover:text-white hover:bg-gray-700 transition-colors"
-              onClick={closeMobileMenu}
-            >
+              onClick={closeMobileMenu}>
               Caps
             </Link>
           </div>

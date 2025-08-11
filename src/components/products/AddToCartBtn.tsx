@@ -36,7 +36,7 @@ const AddToCartBtn = ({
       dispatch(openCart());
       toast.success("Added to cart");
     } catch (error: any) {
-      toast.error(error.message || "Error occured while adding to cart");
+      toast.error(error);
     }
   };
   return (

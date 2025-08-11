@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { BiDollar } from "react-icons/bi";
+import { PulseLoader } from "react-spinners";
 
 type Props = {
   totalAmount: () => number;
@@ -56,9 +57,12 @@ const ProductsCheckout = ({ totalAmount }: Props) => {
           loading
             ? "bg-blue-400 cursor-not-allowed"
             : "bg-blue-500 hover:bg-blue-600"
-        }`}
-      >
-        {loading ? "Redirecting..." : "Proceed to Checkout"}
+        }`}>
+        {loading ? (
+          <PulseLoader size={6} color="#fff" />
+        ) : (
+          "Proceed to Checkout"
+        )}
       </button>
     </div>
   );

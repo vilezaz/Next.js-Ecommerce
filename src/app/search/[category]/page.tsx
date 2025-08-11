@@ -15,10 +15,10 @@ const CategoryPage = async ({ params }: Props) => {
   const products = await getProductByCategory(category);
 
   return (
-    <div className="flex bg-[#171717] min-h-[80vh] text-white py-5">
+    <div className="flex bg-[#171717] min-h-[90vh] pt-20 text-white py-5">
       <CollectionSidebar />
 
-      <div className="grid grid-cols-3 gap-5 grow">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-5 grow">
         {products.map((product) => (
           <ProductCard key={product._id} product={product} />
         ))}

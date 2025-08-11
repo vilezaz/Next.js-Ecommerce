@@ -28,7 +28,7 @@ const AllProductsPage = async ({ searchParams }: Props) => {
   };
 
   return (
-    <div className="flex bg-[#171717] min-h-[80vh] text-white py-5 pt-20">
+    <div className="flex bg-[#171717] min-h-[90vh] text-white py-5 pt-20">
       <CollectionSidebar />
 
       {productNotFound() || (

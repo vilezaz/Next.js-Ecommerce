@@ -35,7 +35,8 @@ export function useOptimisticCart() {
       return state
         .map((item) => {
           if (item.product._id === productId && item.size === size) {
-            const newQty = type === "increase" ? item.quantity + 1 : item.quantity - 1;
+            const newQty =
+              type === "increase" ? item.quantity + 1 : item.quantity - 1;
             return newQty > 0 ? { ...item, quantity: newQty } : null;
           }
           return item;
@@ -49,7 +50,11 @@ export function useOptimisticCart() {
     size: string,
     type: ActionType
   ) => {
-    const rollback: any = { productId, size, type: type === "increase" ? "decrease" : "increase" };
+    const rollback: any = {
+      productId,
+      size,
+      type: type === "increase" ? "decrease" : "increase",
+    };
 
     startTransition(async () => {
       updateOptimistic({ productId, size, type });
@@ -58,25 +63,33 @@ export function useOptimisticCart() {
         if (type === "increase") {
           await dispatch(addToCart({ productId, quantity: 1, size })).unwrap();
         } else {
-          await dispatch(decreaseCart({ productId, quantity: 1, size })).unwrap();
+          await dispatch(
+            decreaseCart({ productId, quantity: 1, size })
+          ).unwrap();
         }
       } catch {
         updateOptimistic(rollback);
-        toast.error(`Failed to ${type === "increase" ? "add" : "remove"} item from cart`);
+        toast.error(
+          `Failed to ${type === "increase" ? "add" : "remove"} item from cart`
+        );
       }
     });
   };
 
-  const totalAmount = optimisticItems.reduce(
-    (acc, item) => acc + item.quantity * item.product.price,
-    0
-  );
+  const totalAmount = Array.isArray(optimisticItems)
+    ? optimisticItems.reduce(
+        (acc, item) => acc + item.quantity * item.product.price,
+        0
+      )
+    : 0;
 
   return {
     optimisticItems,
     isPending,
-    handleIncrease: (id: string, size: string) => handleUpdate(id, size, "increase"),
-    handleDecrease: (id: string, size: string) => handleUpdate(id, size, "decrease"),
+    handleIncrease: (id: string, size: string) =>
+      handleUpdate(id, size, "increase"),
+    handleDecrease: (id: string, size: string) =>
+      handleUpdate(id, size, "decrease"),
     totalAmount,
   };
 }

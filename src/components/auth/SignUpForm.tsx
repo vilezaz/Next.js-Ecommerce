@@ -12,6 +12,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { signUpUser } from "@/redux/auth/authThunk";
 import { useDispatch } from "react-redux";
+import { PulseLoader } from "react-spinners";
 
 const SignUpForm = () => {
   const dispatch = useDispatch<any>();
@@ -34,7 +35,7 @@ const SignUpForm = () => {
       router.push("/");
       router.refresh();
     } catch (error: any) {
-      toast.error(error.message || "Signup failed");
+      toast.error(error);
     }
   };
   return (
@@ -42,7 +43,9 @@ const SignUpForm = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col gap-2 mt-5 text-white">
       <div className="flex flex-col">
-        <label className="text-sm" htmlFor="email">Email</label>
+        <label className="text-sm" htmlFor="email">
+          Email
+        </label>
         <input
           {...register("email")}
           type="email"
@@ -58,7 +61,9 @@ const SignUpForm = () => {
       </div>
 
       <div className="flex flex-col">
-        <label className="text-sm" htmlFor="password">Password</label>
+        <label className="text-sm" htmlFor="password">
+          Password
+        </label>
         <input
           {...register("password")}
           type="password"
@@ -75,7 +80,9 @@ const SignUpForm = () => {
         )}
       </div>
       <div className="flex flex-col">
-        <label className="text-sm" htmlFor="password">Confirm Password</label>
+        <label className="text-sm" htmlFor="password">
+          Confirm Password
+        </label>
         <input
           {...register("confirmPassword")}
           type="password"
@@ -97,7 +104,7 @@ const SignUpForm = () => {
         className={`bg-blue-500 px-3 py-2.5 text-lg rounded-md my-3 font-semibold transition-colors duration-300 ${
           isSubmitting ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-600"
         }`}>
-        {isSubmitting ? "Signing Up..." : "Sign Up"}
+        {isSubmitting ? <PulseLoader size={6} color="#fff" /> : "Sign Up"}
       </button>
     </form>
   );

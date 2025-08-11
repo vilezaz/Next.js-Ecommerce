@@ -4,6 +4,7 @@ import { IoClose } from "react-icons/io5";
 import CartProducts from "./CartProducts";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
+import { FiLogIn } from "react-icons/fi";
 
 interface Cart {
   isOpen: boolean;
@@ -20,20 +21,17 @@ const CartModel = ({ isOpen, onClose }: Cart) => {
         isOpen
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"
-      }`}
-    >
+      }`}>
       <div
         onClick={(e) => e.stopPropagation()}
         className={`absolute right-0 top-0 h-full w-3/4 sm:w-[400px] border border-gray-800 cursor-default backdrop-blur-3xl p-0.5 md:p-4 rounded-md shadow-xl transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "translate-x-full"
-        } transform`}
-      >
+        } transform`}>
         <div className="flex justify-between items-center mb-4 px-3 sm:px-5 mt-2.5">
           <h2 className="text-lg font-bold">My Cart</h2>
           <button
             className="text-xl border rounded-sm p-1.5 border-gray-600 cursor-pointer group transition-all duration-300"
-            onClick={onClose}
-          >
+            onClick={onClose}>
             <IoClose
               className="cursor-pointer group-hover:scale-105"
               size={24}
@@ -44,7 +42,12 @@ const CartModel = ({ isOpen, onClose }: Cart) => {
           {!loading && user ? (
             <CartProducts />
           ) : (
-            <p className="text-sm sm:text-base">Plz login to see your cart</p>
+            <div className="px-3 sm:px-5 flex flex-col items-center justify-center py-8 text-center">
+              <FiLogIn className="text-4xl sm:text-5xl mb-3 text-gray-400" />
+              <p className="text-lg sm:text-xl font-medium text-gray-300">
+                Please sign in to view your cart
+              </p>
+            </div>
           )}
         </div>
       </div>

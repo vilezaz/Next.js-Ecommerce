@@ -10,7 +10,13 @@ export const signUpUser = createAsyncThunk(
       const res = await api.post("/api/auth/signup", data);
       return res.data.user;
     } catch (err: any) {
-      return rejectWithValue(err.response?.data?.message || "Signup failed");
+      if (err.response?.data?.message) {
+        return rejectWithValue(err.response.data.message);
+      }
+      if (err.message) {
+        return rejectWithValue(err.message);
+      }
+      return rejectWithValue("Signup failed");
     }
   }
 );
@@ -23,7 +29,13 @@ export const signInUser = createAsyncThunk(
       const res = await api.post("/api/auth/signin", data);
       return res.data.user;
     } catch (err: any) {
-      return rejectWithValue(err.response?.data?.message || "Signin failed");
+      if (err.response?.data?.message) {
+        return rejectWithValue(err.response.data.message);
+      }
+      if (err.message) {
+        return rejectWithValue(err.message);
+      }
+      return rejectWithValue("Signin failed");
     }
   }
 );
@@ -36,7 +48,13 @@ export const signOutUser = createAsyncThunk(
       await api.post("/api/auth/signout");
       return null;
     } catch (err: any) {
-      return rejectWithValue(err.response?.data?.message || "Signout failed");
+      if (err.response?.data?.message) {
+        return rejectWithValue(err.response.data.message);
+      }
+      if (err.message) {
+        return rejectWithValue(err.message);
+      }
+      return rejectWithValue("Signout failed");
     }
   }
 );

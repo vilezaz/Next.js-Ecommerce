@@ -9,6 +9,7 @@ import { AppDispatch, RootState } from "@/redux/store";
 import { openCart } from "@/redux/slices/modalSlice";
 import toast from "react-hot-toast";
 import { BiDollar } from "react-icons/bi";
+import { PulseLoader } from "react-spinners";
 
 type Props = {
   product: Product;
@@ -68,8 +69,7 @@ const ProductDetailsClient = ({ product, sizes }: Props) => {
                 onClick={() => setSelectedSize(size)}
                 className={`text-xs sm:text-sm px-4 sm:px-5 py-2 sm:py-2 w-14 sm:w-16 rounded-full ${
                   selectedSize === size ? "bg-blue-600" : "bg-[#171717]"
-                } hover:cursor-pointer border border-transparent hover:border-blue-500`}
-              >
+                } hover:cursor-pointer border border-transparent hover:border-blue-500`}>
                 {size}
               </button>
             ))}
@@ -83,9 +83,8 @@ const ProductDetailsClient = ({ product, sizes }: Props) => {
             !selectedSize || isPending
               ? "bg-blue-400 cursor-not-allowed"
               : "bg-blue-500 hover:bg-blue-600"
-          }`}
-        >
-          {isPending ? "Adding ..." : "Add to Cart"}
+          }`}>
+          {isPending ? <PulseLoader size={6} color="#fff" /> : "Add to Cart"}
         </button>
       </div>
     </div>

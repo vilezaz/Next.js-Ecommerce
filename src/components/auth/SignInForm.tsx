@@ -11,6 +11,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { PulseLoader } from "react-spinners";
 
 const SignInForm = () => {
   const dispatch = useDispatch<any>();
@@ -31,7 +32,7 @@ const SignInForm = () => {
       reset();
       router.push("/");
     } catch (error: any) {
-      toast.error(error.message || "SignIn failed");
+      toast.error(error);
     }
   };
 
@@ -75,7 +76,7 @@ const SignInForm = () => {
         className={`bg-blue-500 px-3 py-2.5 text-lg rounded-md my-3 font-semibold transition-colors duration-300 ${
           isSubmitting ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-600"
         }`}>
-        {isSubmitting ? "Signing In..." : "Sign In"}
+        {isSubmitting ?  <PulseLoader size={6} color="#fff" /> : "Sign In"}
       </button>
     </form>
   );
