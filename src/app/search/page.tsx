@@ -9,13 +9,21 @@ export const metadata = {
 };
 
 type Props = {
-  searchParams: Promise<{ query?: string }>;
+  searchParams: Promise<{ query?: string; sort?: string }>;
 };
 
 const AllProductsPage = async ({ searchParams }: Props) => {
   const sp = await searchParams;
   const query = sp.query || "";
+  const sort = sp.sort || "";
+
   const products = query ? await searchProducts(query) : await getAllProducts();
+
+  const sortedProducts = [...products].sort((a, b) => {
+    if (sort === "price-asc") return a.price - b.price;
+    if (sort === "price-desc") return b.price - a.price;
+    return 0;
+  });
 
   const productNotFound = () => {
     if (query && products.length === 0) {
@@ -34,7 +42,7 @@ const AllProductsPage = async ({ searchParams }: Props) => {
       {productNotFound() || (
         <>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-5 grow">
-            {products.map((product, _index) => {
+            {sortedProducts.map((product, _index) => {
               return <ProductCard key={product._id} product={product} />;
             })}
           </div>
