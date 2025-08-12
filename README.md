@@ -29,11 +29,17 @@ npm run dev
 
 Below are some preview images of the application (stored in the `public/` folder):
 
+### Home Page
 ![Home Page](public/picturesForGithub/1.png)
+### All Products Page
 ![Product Listing](public/picturesForGithub/2.png)
+### Loading Skeltons For Pages
 ![Product Skelton Loading](public/picturesForGithub/3.png)
+### Product Details
 ![Product Details](public/picturesForGithub/33.png)
+### Category Page
 ![Category Page](public/picturesForGithub/4.png)
+### Cart View
 ![Cart View](public/picturesForGithub/5.png)
 
 ---
