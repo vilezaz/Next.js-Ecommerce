@@ -19,7 +19,7 @@ You can clone this repository and run the application locally:
 ```bash
 git clone https://github.com/vilezaz/Next.js-Ecommerce.git
 
-cd Ecommerce-Next.js
+cd Next.js-Ecommerce
 npm install
 npm run dev
 ```
